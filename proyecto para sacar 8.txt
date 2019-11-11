@@ -1,0 +1,26 @@
+-5 catalogos ABC (2 implementado completo){
+
+desde el backend hasta el frontend
+-lista de libros mas pedidos
+-lista de comentarios en libro
+}
+
+-Login
+
+-Logout
+
+-Roles
+
+-Pagina principal 
+
+-Envio notificaciones al correo
+
+-Reportaes en excel
+
+-Pdf
+
+-minimo 10 reglas de negocio o 15
+
+-Estructura de carpetas, codigo limpio, errores badrequest, 
+-dataanotations
+-interfaces con I 
