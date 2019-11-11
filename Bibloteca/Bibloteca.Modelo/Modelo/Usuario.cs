@@ -10,6 +10,7 @@ namespace Bibloteca.Modelo.Modelo
     public class Usuario
     {
         [Key]
+        public int Id { get; set; }
         [MaxLength(25), Required(ErrorMessage = "Se necesita un nombre de usurio")]
         public string User { get; set; }
         [MaxLength(100), Required(ErrorMessage ="Se necesita capturar tu nombre" ), RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Usa solamente letras")]

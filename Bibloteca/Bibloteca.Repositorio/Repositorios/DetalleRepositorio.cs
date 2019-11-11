@@ -15,8 +15,6 @@ namespace Bibloteca.Repositorio.Repositorios
         private readonly DatosDbContext _db = new DatosDbContext();
         public int Insert(Detalle detalle)
         { 
-            
-            
             _db.Detalle.Add(detalle);
             _db.SaveChanges();
             return 1;

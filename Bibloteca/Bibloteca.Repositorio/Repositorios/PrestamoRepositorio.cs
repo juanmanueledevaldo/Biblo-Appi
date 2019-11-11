@@ -25,7 +25,7 @@ namespace Bibloteca.Repositorio.Repositorios
         }
 
         public int Insert(Prestamo prestamo)
-        {   
+        {
             prestamo.Fecha = DateTime.Now.Date;
             prestamo.Devolucion = DateTime.Now.Date;
             _db.Add(prestamo);
