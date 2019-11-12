@@ -30,7 +30,7 @@ namespace Bibloteca.Modelo.Modelo
         /// 
         /// </summary>
         public virtual Usuario Usuario { get; set; }
-        public Nullable<int> UsuarioId { get; set; }
+        public Nullable<int> Usuarioi { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Detalle> Detalle { get; set; }
     }

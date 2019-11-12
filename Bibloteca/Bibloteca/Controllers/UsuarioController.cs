@@ -26,6 +26,7 @@ namespace Bibloteca.Controllers
         {
             try
             {
+               
                 return Ok(_usuarioServicio.GetUsuarios());
 
             }

@@ -31,7 +31,7 @@ namespace Bibloteca.Repositorio.Repositorios
 
     public Task<Usuario> Get(string id)
         {
-            return _db.Usuario.FirstOrDefaultAsync(us => us.User == id);
+            return _db.Usuario.FirstOrDefaultAsync(us => us.Mote == id);
         }
 
         public IEnumerable<Usuario> GetTodos()
@@ -53,7 +53,7 @@ namespace Bibloteca.Repositorio.Repositorios
             {
                 _db.Entry(usuario).State = EntityState.Modified;
                 _db.SaveChanges();
-                return _db.Usuario.FirstOrDefaultAsync(us => us.User == usuario.User);
+                return _db.Usuario.FirstOrDefaultAsync(us => us.Mote == usuario.Mote);
             }
             catch (Exception)
             {

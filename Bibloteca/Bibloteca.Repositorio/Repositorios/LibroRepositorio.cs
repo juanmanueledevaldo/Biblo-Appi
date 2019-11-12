@@ -11,16 +11,16 @@ namespace Bibloteca.Repositorio.Repositorios
     public interface ILibroRepositorio
     {
         IEnumerable<Libro> GetTodos();
-        Task<Libro> Get(string id);
+        Libro Get(string id);
         int Insert(Libro libro);
         Task<Libro> Update(Libro libro);
     }
     public class LibroRepositorio : ILibroRepositorio
     {
         private readonly DatosDbContext _db = new DatosDbContext();
-        public Task<Libro> Get(string id)
+        public Libro Get(string id)
         {
-            return _db.Libro.FirstOrDefaultAsync(li => li.Id == id);
+            return _db.Libro.FirstOrDefaultAsync(li => li.Id == id).Result;
         }
 
         public IEnumerable<Libro> GetTodos()
