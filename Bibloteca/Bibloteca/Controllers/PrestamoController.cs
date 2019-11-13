@@ -41,6 +41,7 @@ namespace Bibloteca.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Prestamo value)
         {
+
                 try
                 {
                     _prestamoServicio.Add(value);
