@@ -11,8 +11,8 @@ using System;
 namespace Bibloteca.Repositorio.Migrations
 {
     [DbContext(typeof(DatosDbContext))]
-    [Migration("20191111224938_jua")]
-    partial class jua
+    [Migration("20191114015641_a")]
+    partial class a
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,7 +26,7 @@ namespace Bibloteca.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("LibroId");
+                    b.Property<int?>("LibroId");
 
                     b.Property<int?>("Libroi");
 
@@ -45,7 +45,7 @@ namespace Bibloteca.Repositorio.Migrations
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Libro", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Autor")
@@ -63,6 +63,9 @@ namespace Bibloteca.Repositorio.Migrations
                     b.Property<string>("Estante")
                         .IsRequired()
                         .HasMaxLength(30);
+
+                    b.Property<string>("Folio")
+                        .IsRequired();
 
                     b.Property<string>("Genero")
                         .IsRequired()

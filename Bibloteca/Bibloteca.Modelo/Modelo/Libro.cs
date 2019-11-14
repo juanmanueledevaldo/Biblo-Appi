@@ -10,9 +10,10 @@ namespace Bibloteca.Modelo.Modelo
     public class Libro
     {
         [Key]
+        public int Id { get; set; }
         [Required(ErrorMessage = "Se requiere capturar el id del libro")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Solo numeros y letras.")]
-        public string Id { get; set; }
+        public string Folio { get; set; }
         [Required(ErrorMessage = "Se requiere el nombre del libro")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Solo numeros y letras.")]
         [MaxLength(100)]

@@ -11,9 +11,10 @@ namespace Bibloteca.Servicio.Servicio
     public interface IUsuarioServicio
     {
         IEnumerable<Usuario> GetUsuarios();
-        Task<Usuario> Get(string id);
+        Usuario Get(int id);
         void Add(Usuario usuario);
-        Task<Usuario> Update(Usuario usuario);  
+        Task<Usuario> Update(Usuario usuario);
+        Usuario Login(Login login);
     }
     public class UsuarioServicio : IUsuarioServicio
     {
@@ -27,9 +28,9 @@ namespace Bibloteca.Servicio.Servicio
         {
             _usuarioRepositorio.Insert(usuario);
         }
-        public Task<Usuario> Get(string id)
+        public Usuario Get(int id)
         {
-            return _usuarioRepositorio.Get(id);
+            return _usuarioRepositorio.Get(id).Result;
 
         }
 
@@ -37,6 +38,11 @@ namespace Bibloteca.Servicio.Servicio
         {
             return _usuarioRepositorio.GetTodos();
 
+        }
+
+        public Usuario Login(Login login)
+        {
+            return new Usuario() { Mote = "Juanito" }; 
         }
 
         public Task<Usuario> Update(Usuario usuario)

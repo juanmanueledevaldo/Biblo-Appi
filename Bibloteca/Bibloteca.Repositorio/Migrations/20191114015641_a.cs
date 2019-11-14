@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Bibloteca.Repositorio.Migrations
 {
-    public partial class jua : Migration
+    public partial class a : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,12 +13,14 @@ namespace Bibloteca.Repositorio.Migrations
                 name: "Libro",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Autor = table.Column<string>(maxLength: 50, nullable: false),
                     Año = table.Column<string>(nullable: false),
                     Borrado = table.Column<bool>(nullable: false),
                     Editorial = table.Column<string>(nullable: false),
                     Estante = table.Column<string>(maxLength: 30, nullable: false),
+                    Folio = table.Column<string>(nullable: false),
                     Genero = table.Column<string>(maxLength: 50, nullable: false),
                     Imagen = table.Column<string>(nullable: false),
                     Nombre = table.Column<string>(maxLength: 100, nullable: false),
@@ -79,7 +81,7 @@ namespace Bibloteca.Repositorio.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    LibroId = table.Column<string>(nullable: true),
+                    LibroId = table.Column<int>(nullable: true),
                     Libroi = table.Column<int>(nullable: true),
                     PrestamoId = table.Column<int>(nullable: true),
                     Prestamoi = table.Column<int>(nullable: true)

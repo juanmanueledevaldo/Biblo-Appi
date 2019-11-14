@@ -11,7 +11,7 @@ namespace Bibloteca.Repositorio.Repositorios
     public interface IUsuarioRepositorio
     {
         IEnumerable<Usuario> GetTodos();
-        Task<Usuario> Get(string id);
+        Task<Usuario> Get(int id);
         int Insert(Usuario usuario);
         Task<Usuario> Update(Usuario usuario);
     }
@@ -29,9 +29,9 @@ namespace Bibloteca.Repositorio.Repositorios
             return 1;
         }
 
-    public Task<Usuario> Get(string id)
+    public Task<Usuario> Get(int id)
         {
-            return _db.Usuario.FirstOrDefaultAsync(us => us.Mote == id);
+            return _db.Usuario.FirstOrDefaultAsync(us => us.Id == id);
         }
 
         public IEnumerable<Usuario> GetTodos()

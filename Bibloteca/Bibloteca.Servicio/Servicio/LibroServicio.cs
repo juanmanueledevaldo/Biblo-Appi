@@ -11,7 +11,7 @@ namespace Bibloteca.Servicio.Servicio
     public interface ILibroServicio
     {
         IEnumerable<Libro> GetLibros();
-        Libro Get(string id);
+        Libro Get(int id);
         void Add(Libro libro);
         Task<Libro> Update(Libro libro);
     }
@@ -27,7 +27,7 @@ namespace Bibloteca.Servicio.Servicio
         {
             _libroRepositorio.Insert(libro);
         }
-        public Libro Get(string id)
+        public Libro Get(int id)
         {
             return _libroRepositorio.Get(id);
         }
