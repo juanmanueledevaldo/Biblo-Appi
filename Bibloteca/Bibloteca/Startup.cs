@@ -63,8 +63,9 @@ namespace Bibloteca
                 app.UseDeveloperExceptionPage();
             }
             app.UseCors(option => option.WithOrigins("http://localhost:4200/").AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
-            app.UseMvc();
             app.UseAuthentication();
+            app.UseMvc();
+            
         }
     }
 }
