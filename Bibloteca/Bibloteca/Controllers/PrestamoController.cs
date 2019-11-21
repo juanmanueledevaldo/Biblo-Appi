@@ -41,33 +41,16 @@ namespace Bibloteca.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Prestamo value)
         {
-            if (value.Id != 0)
-            {
+
                 try
                 {
                     _prestamoServicio.Add(value);
-                    
                     return Ok(200);
                 }
                 catch (Exception e)
                 {
                     return BadRequest(e);
                 }
-            }
-            else
-            {
-                try
-                {
-                    _detalleServicio.Add(value.Detalle);
-                    return Ok(200);
-                }
-                catch (Exception e)
-                {
-
-                    return BadRequest(e);
-
-                }
-            }
         }
         
         // PUT: api/Prestamo/5

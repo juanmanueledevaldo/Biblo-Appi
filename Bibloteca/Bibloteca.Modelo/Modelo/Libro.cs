@@ -10,9 +10,10 @@ namespace Bibloteca.Modelo.Modelo
     public class Libro
     {
         [Key]
+        public int Id { get; set; }
         [Required(ErrorMessage = "Se requiere capturar el id del libro")]
-        [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Solo numeros y letras.")]
-        public string Id { get; set; }
+        
+        public string Folio { get; set; }
         [Required(ErrorMessage = "Se requiere el nombre del libro")]
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Solo numeros y letras.")]
         [MaxLength(100)]
@@ -30,9 +31,9 @@ namespace Bibloteca.Modelo.Modelo
         [RegularExpression("^[a-zA-Z0-9]*$", ErrorMessage = "Solo numeros y letras.")]
         [MaxLength(30)]
         public string Estante { get; set; }
-        [Required(ErrorMessage = "Se requiere la fecha de devolución")]
+        [Required(ErrorMessage = "Se requiere la fecha en la que se elaboro el libro")]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
-        public string Año { get; set; }
+        public string Anio { get; set; }
         [Required(ErrorMessage = "Se requiere capturar la editorial")]
         public string Editorial { get; set; }
         [Required (ErrorMessage = "Se requiere capturar el numero de paginas que tiene el libro")]
@@ -43,7 +44,9 @@ namespace Bibloteca.Modelo.Modelo
         [Range(0, short.MaxValue, ErrorMessage = "El valor {0} debe ser numérico.")]
         [RegularExpression("^\\d+$", ErrorMessage = "El stock debe contener sólo números.")]
         public int Stock { get; set; }
-        [Required(ErrorMessage = "Se requiere una url de la imagen")]
+        [Required(ErrorMessage = "Se requiere ingresar la imagen del libro")]
         public string Imagen { get; set; }
+        [MaxLength(300)]
+        public string Descripcion { get; set; }
     }
 }

@@ -22,31 +22,42 @@ namespace Bibloteca.Repositorio.Migrations
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Detalle", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Lib");
+                    b.Property<int?>("LibroId");
+
+                    b.Property<int?>("Libroi");
+
+                    b.Property<int?>("PrestamoId");
+
+                    b.Property<int?>("Prestamoi");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Lib");
+                    b.HasIndex("LibroId");
+
+                    b.HasIndex("PrestamoId");
 
                     b.ToTable("Detalle");
                 });
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Libro", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Anio")
+                        .IsRequired();
 
                     b.Property<string>("Autor")
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<string>("Año")
-                        .IsRequired();
-
                     b.Property<bool>("Borrado");
+
+                    b.Property<string>("Descripcion")
+                        .HasMaxLength(300);
 
                     b.Property<string>("Editorial")
                         .IsRequired();
@@ -54,6 +65,9 @@ namespace Bibloteca.Repositorio.Migrations
                     b.Property<string>("Estante")
                         .IsRequired()
                         .HasMaxLength(30);
+
+                    b.Property<string>("Folio")
+                        .IsRequired();
 
                     b.Property<string>("Genero")
                         .IsRequired()
@@ -80,10 +94,6 @@ namespace Bibloteca.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("Det");
-
-                    b.Property<int?>("DetId");
-
                     b.Property<DateTime>("Devolucion");
 
                     b.Property<string>("Estado")
@@ -91,24 +101,24 @@ namespace Bibloteca.Repositorio.Migrations
 
                     b.Property<DateTime>("Fecha");
 
-                    b.Property<string>("Usu");
+                    b.Property<string>("Folio")
+                        .IsRequired();
 
-                    b.Property<int?>("UsuId");
+                    b.Property<int?>("UsuarioId");
+
+                    b.Property<int?>("Usuarioi");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Det");
-
-                    b.HasIndex("Usu");
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Prestamo");
                 });
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Usuario", b =>
                 {
-                    b.Property<string>("User")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(25);
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<bool>("Activo");
 
@@ -122,6 +132,10 @@ namespace Bibloteca.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(10);
 
+                    b.Property<string>("Mote")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -129,7 +143,7 @@ namespace Bibloteca.Repositorio.Migrations
                     b.Property<string>("Tipo")
                         .IsRequired();
 
-                    b.HasKey("User");
+                    b.HasKey("Id");
 
                     b.ToTable("Usuario");
                 });
@@ -138,18 +152,18 @@ namespace Bibloteca.Repositorio.Migrations
                 {
                     b.HasOne("Bibloteca.Modelo.Modelo.Libro", "Libro")
                         .WithMany()
-                        .HasForeignKey("Lib");
+                        .HasForeignKey("LibroId");
+
+                    b.HasOne("Bibloteca.Modelo.Modelo.Prestamo", "Prestamo")
+                        .WithMany("Detalle")
+                        .HasForeignKey("PrestamoId");
                 });
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Prestamo", b =>
                 {
-                    b.HasOne("Bibloteca.Modelo.Modelo.Detalle", "Detalle")
-                        .WithMany()
-                        .HasForeignKey("Det");
-
                     b.HasOne("Bibloteca.Modelo.Modelo.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("Usu");
+                        .HasForeignKey("UsuarioId");
                 });
 #pragma warning restore 612, 618
         }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bibloteca.Modelo.Modelo;
 using Bibloteca.Recursos;
 using Bibloteca.Servicio.Servicio;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +22,12 @@ namespace Bibloteca.Controllers
             this._usuarioServicio = userService;
         }
         [HttpGet]
-        
+        [Authorize]
         public IActionResult Get()
         {
             try
             {
+               
                 return Ok(_usuarioServicio.GetUsuarios());
 
             }
@@ -38,9 +40,9 @@ namespace Bibloteca.Controllers
 
         // GET: api/Usuario/5
         [HttpGet("{id}")]
-        public IActionResult Get(string id)
+        public IActionResult Get(int id)
         {
-            return Ok(_usuarioServicio.Get(id).Result);
+            return Ok(_usuarioServicio.Get(id));
         }
         // POST: api/Usuario
         [HttpPost]
