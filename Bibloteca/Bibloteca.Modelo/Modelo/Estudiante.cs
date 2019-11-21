@@ -8,7 +8,8 @@ namespace Bibloteca.Modelo.Modelo
     public class Estudiante:Usuario
     {
         [Required(ErrorMessage ="Se requiere una matricula")]
-        [MaxLength(10)]
+        
+        [MaxLength(10 , ErrorMessage = "Solo se puede ingresar un valor de 10 caracteres")]
         public string Matricula { get; set; }
         [Required(ErrorMessage = "Se requiere un numero de telefono")]
         [MaxLength(20)]

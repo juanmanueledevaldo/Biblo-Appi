@@ -11,9 +11,10 @@ using System;
 namespace Bibloteca.Repositorio.Migrations
 {
     [DbContext(typeof(DatosDbContext))]
-    partial class DatosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191121052226_AgregoDescripcion")]
+    partial class AgregoDescripcion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

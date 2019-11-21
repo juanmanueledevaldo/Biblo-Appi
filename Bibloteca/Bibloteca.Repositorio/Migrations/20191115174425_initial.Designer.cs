@@ -11,9 +11,10 @@ using System;
 namespace Bibloteca.Repositorio.Migrations
 {
     [DbContext(typeof(DatosDbContext))]
-    partial class DatosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191115174425_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,17 +48,14 @@ namespace Bibloteca.Repositorio.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Anio")
-                        .IsRequired();
-
                     b.Property<string>("Autor")
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<bool>("Borrado");
+                    b.Property<string>("Año")
+                        .IsRequired();
 
-                    b.Property<string>("Descripcion")
-                        .HasMaxLength(300);
+                    b.Property<bool>("Borrado");
 
                     b.Property<string>("Editorial")
                         .IsRequired();

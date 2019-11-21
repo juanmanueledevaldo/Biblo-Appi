@@ -11,9 +11,10 @@ using System;
 namespace Bibloteca.Repositorio.Migrations
 {
     [DbContext(typeof(DatosDbContext))]
-    partial class DatosDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191121045914_ArreglodeLibro")]
+    partial class ArreglodeLibro
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,9 +56,6 @@ namespace Bibloteca.Repositorio.Migrations
                         .HasMaxLength(50);
 
                     b.Property<bool>("Borrado");
-
-                    b.Property<string>("Descripcion")
-                        .HasMaxLength(300);
 
                     b.Property<string>("Editorial")
                         .IsRequired();
