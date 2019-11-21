@@ -9,6 +9,8 @@ namespace Bibloteca.Servicio.Servicio
     public interface IDetalleServicio
     {
         void Add(Detalle detalle);
+        int Remove(int id);
+        IEnumerable<Detalle> GetDetalles();
     }
     public class DetalleServicio : IDetalleServicio
     {
@@ -21,6 +23,16 @@ namespace Bibloteca.Servicio.Servicio
         {
             _detalleRepositorio.Insert(detalle);
             
+        }
+
+        public IEnumerable<Detalle> GetDetalles()
+        {
+            return _detalleRepositorio.GetAll();
+        }
+
+        public int Remove(int id)
+        {
+            return _detalleRepositorio.Delete(id);
         }
     }
 }

@@ -22,14 +22,14 @@ namespace Bibloteca.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            return Ok(_detalleServicio.GetDetalles());
         }
 
         // GET: api/Detalle/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            return null;
+            return Ok();
         }
         
         // POST: api/Detalle
@@ -48,8 +48,17 @@ namespace Bibloteca.Controllers
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                return Ok(_detalleServicio.Remove(id));
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
         }
     }
 }
