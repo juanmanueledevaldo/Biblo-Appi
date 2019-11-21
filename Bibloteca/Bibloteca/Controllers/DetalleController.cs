@@ -22,7 +22,14 @@ namespace Bibloteca.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            try
+            {
+                return Ok(_detalleServicio.GetDetalles());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
         // GET: api/Detalle/5
@@ -36,8 +43,16 @@ namespace Bibloteca.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Detalle value)
         {
-            _detalleServicio.Add(value);
-            return Ok(200);
+            try
+            {
+                _detalleServicio.Add(value);
+                return Ok(200);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
         }
         
         // PUT: api/Detalle/5
@@ -48,8 +63,20 @@ namespace Bibloteca.Controllers
         
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                return Ok(
+                    _detalleServicio.Delete(id)
+                    );
+                
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
         }
     }
 }
