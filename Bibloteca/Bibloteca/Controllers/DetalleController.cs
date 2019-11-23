@@ -36,8 +36,16 @@ namespace Bibloteca.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Detalle value)
         {
-            _detalleServicio.Add(value);
-            return Ok(200);
+            try
+            {
+                _detalleServicio.Add(value);
+                return Ok(200);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
         }
         
         // PUT: api/Detalle/5
