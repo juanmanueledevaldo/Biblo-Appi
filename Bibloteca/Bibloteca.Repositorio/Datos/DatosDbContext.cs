@@ -26,12 +26,13 @@ namespace Bibloteca.Repositorio.Datos
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(cadena);
+                optionsBuilder.UseSqlServer(cadena1);
             }
         }
 
 
         public virtual DbSet<Libro> Libro { get; set; }
+        public virtual DbSet<Estudiante> Estudiante{ get; set; }
         public virtual DbSet<Detalle> Detalle { get; set; }
         public virtual DbSet<Prestamo> Prestamo { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
