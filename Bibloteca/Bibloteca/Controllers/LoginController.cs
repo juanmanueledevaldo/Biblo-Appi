@@ -60,11 +60,14 @@ namespace Bibloteca.Controllers
                 Usuario userExistente = _usuarioServicio.Login(value);
                 if (userExistente ==null)
                 {
-                    return BadRequest();
+                    return BadRequest(Mensajes.LoginError);
                 }
                 else
                 {
+
+
                     List<Claim> claims = new List<Claim>();
+                  
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImxvcXVlc2VhIiwiaWF0IjoxNTE2MjM5MDIyfQ.KI2p5vksjJRiO_1R7qSkmeGZchby9gpuJHLPPkh2EUg"));
                     JwtSecurityToken token = new JwtSecurityToken(
                             claims: claims,
@@ -84,7 +87,24 @@ namespace Bibloteca.Controllers
                 throw;
             }
         }
-        
+
+
+        [HttpGet]
+        [Authorize]
+        [Route("api/login/UserProfile")]
+        //GET : /api/UserProfile
+        public object GetUserProfile(int id)
+        {
+            string userId = User.Claims.First(c => c.Type == "UserID").Value;
+            var user = _usuarioServicio.Get(id);
+            return new
+            {
+                user.Mote,
+                user.Nombre,
+                user.Tipo
+            };
+        }
+
         // PUT: api/Login/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]string value)

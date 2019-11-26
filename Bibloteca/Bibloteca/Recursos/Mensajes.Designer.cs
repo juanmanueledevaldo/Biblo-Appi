@@ -61,6 +61,15 @@ namespace Bibloteca.Recursos {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ha ocurrido un error al consultar el nombre de usuario y contraseña.
+        /// </summary>
+        public static string LoginError {
+            get {
+                return ResourceManager.GetString("LoginError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ha ocurrido un error.
         /// </summary>
         public static string UsuarioError {
