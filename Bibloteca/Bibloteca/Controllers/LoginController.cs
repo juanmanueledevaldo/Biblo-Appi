@@ -10,6 +10,7 @@ using Bibloteca.Servicio.Servicio;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Bibloteca.Recursos;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Bibloteca.Controllers
@@ -25,10 +26,20 @@ namespace Bibloteca.Controllers
         }
         // GET: api/Login
         [HttpGet]
-        [Authorize]
-        public IEnumerable<string> Get()
+        //[Authorize]
+        public IActionResult Get()
         {
-            return new string[] { "Si funciona" };
+            try
+            {
+
+                return Ok(_usuarioServicio.GetUsuarios());
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest(Mensajes.UsuarioError);
+            }
         }
 
         // GET: api/Login/5

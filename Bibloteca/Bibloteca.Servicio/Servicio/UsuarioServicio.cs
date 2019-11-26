@@ -42,7 +42,7 @@ namespace Bibloteca.Servicio.Servicio
 
         public Usuario Login(Login login)
         {
-            return new Usuario() { Mote = "Juanito" }; 
+            return _usuarioRepositorio.GetLogin(login);
         }
 
         public Task<Usuario> Update(Usuario usuario)

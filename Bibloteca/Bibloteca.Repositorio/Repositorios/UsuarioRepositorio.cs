@@ -3,6 +3,7 @@ using Bibloteca.Repositorio.Datos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,7 @@ namespace Bibloteca.Repositorio.Repositorios
         Task<Usuario> Get(int id);
         int Insert(Usuario usuario);
         Task<Usuario> Update(Usuario usuario);
+        Usuario GetLogin(Login logeado);
     }
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
@@ -27,6 +29,10 @@ namespace Bibloteca.Repositorio.Repositorios
         //    _db.Usuario.Remove(usuario);
         //    _db.SaveChanges();
             return 1;
+        }
+        public Usuario GetLogin(Login logeado)
+        {
+            return _db.Usuario.Where(x => x.Mote == logeado.Mote && x.Contrasenia == logeado.Contrasenia).FirstOrDefault();
         }
 
     public Task<Usuario> Get(int id)
