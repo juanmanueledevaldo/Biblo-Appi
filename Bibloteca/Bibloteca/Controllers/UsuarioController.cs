@@ -22,7 +22,7 @@ namespace Bibloteca.Controllers
             this._usuarioServicio = userService;
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IActionResult Get()
         {
             try

@@ -18,7 +18,7 @@ namespace Bibloteca.Modelo.Modelo
         [MaxLength(100), Required(ErrorMessage = "Se necesita capturar tu apellido"), RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Usa solamente letras")]
         public string Apellido { get; set; }
         [MaxLength(10), Required(ErrorMessage = "Se necesita capturar una contraseña"), MinLength(4)]
-        public string Contraseña { get; set; }
+        public string Contrasenia { get; set; }
         public bool Activo { get; set; }
         [Required(ErrorMessage = "Se requiere un Tipo de usuario")]
         public string Tipo { get; set; }

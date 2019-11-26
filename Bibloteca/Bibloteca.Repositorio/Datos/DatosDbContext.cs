@@ -26,7 +26,8 @@ namespace Bibloteca.Repositorio.Datos
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(cadena1);
+                optionsBuilder.UseSqlServer(cadena
+                    );
             }
         }
 

@@ -129,7 +129,7 @@ namespace Bibloteca.Repositorio.Migrations
 
                     b.Property<bool>("Borrado");
 
-                    b.Property<string>("Contraseña")
+                    b.Property<string>("Contrasenia")
                         .IsRequired()
                         .HasMaxLength(10);
 
