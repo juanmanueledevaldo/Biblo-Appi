@@ -27,28 +27,42 @@ namespace Bibloteca.Controllers
         // GET: api/Login
         [HttpGet]
         //[Authorize]
-        public IActionResult Get()
+        public Object Get(int id)
         {
-            try
+           
+            var userClaims = HttpContext.User.Claims;
+
+            if (User == null)
             {
-
-                return Ok(_usuarioServicio.GetUsuarios());
-
+                return BadRequest("Error no se ha logeado");
             }
-            catch (Exception)
+            else
             {
+                int userID = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+                var user = _usuarioServicio.Get(id);
+                return new
+                {
+                    user.Mote,
+                    user.Nombre,
+                    user.Tipo
+                   
+                };
 
-                return BadRequest(Mensajes.UsuarioError);
+               
             }
-        }
+                  
+                
+            }
+           
+          
 
         // GET: api/Login/5
        
         [HttpGet("{id}")]
-        public string Get(int id)
+        public string Get(string nombre)
         {
             return "value";
-        }
+            } 
         
         // POST: api/Login
         [HttpPost]
@@ -67,7 +81,9 @@ namespace Bibloteca.Controllers
 
 
                     List<Claim> claims = new List<Claim>();
-                  
+                    //se añade el rol al claim
+                    claims.Add(new Claim(ClaimTypes.Role, Convert.ToString(userExistente.Tipo)));
+                    claims.Add(new Claim("Id",userExistente.Id.ToString()));
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImxvcXVlc2VhIiwiaWF0IjoxNTE2MjM5MDIyfQ.KI2p5vksjJRiO_1R7qSkmeGZchby9gpuJHLPPkh2EUg"));
                     JwtSecurityToken token = new JwtSecurityToken(
                             claims: claims,
@@ -93,17 +109,7 @@ namespace Bibloteca.Controllers
         [Authorize]
         [Route("api/login/UserProfile")]
         //GET : /api/UserProfile
-        public object GetUserProfile(int id)
-        {
-            string userId = User.Claims.First(c => c.Type == "UserID").Value;
-            var user = _usuarioServicio.Get(id);
-            return new
-            {
-                user.Mote,
-                user.Nombre,
-                user.Tipo
-            };
-        }
+      
 
         // PUT: api/Login/5
         [HttpPut("{id}")]

@@ -15,7 +15,7 @@ namespace Bibloteca.Servicio.Servicio
         void Add(Usuario usuario);
         Task<Usuario> Update(Usuario usuario);
         Usuario Login(Login login);
-        object Get(string mote);
+       
     }
     public class UsuarioServicio : IUsuarioServicio
     {
