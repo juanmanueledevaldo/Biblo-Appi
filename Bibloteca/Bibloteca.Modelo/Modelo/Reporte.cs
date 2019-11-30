@@ -14,7 +14,7 @@ namespace Bibloteca.Modelo.Modelo
         public string Nombres { get; set; }
         public string Carrera { get; set; }
         public string Telefono { get; set; }
-        public string Discriminator { get; set; }
+        public string Email { get; set; }
         public string Pedido { get; set; }
     }
 }

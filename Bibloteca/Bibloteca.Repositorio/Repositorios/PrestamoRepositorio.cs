@@ -51,7 +51,7 @@ namespace Bibloteca.Repositorio.Repositorios
                           on lib.Id equals det.Libroi
                           join pre in _db.Prestamo
                           on det.Prestamoi equals pre.Id
-                          join usu in _db.Usuario
+                          join usu in _db.Estudiante
                           on pre.Usuarioi equals usu.Id
                           select new Reporte
                           {
@@ -62,6 +62,9 @@ namespace Bibloteca.Repositorio.Repositorios
                               Devolucion = pre.Devolucion,
                               Estado = pre.Estado,
                               Pedido = lib.Nombre,
+                              Carrera = usu.Carrera,
+                              Telefono = usu.Telefono,
+                              Email = usu.Email
                               
                           };
             return reportes;
