@@ -9,8 +9,8 @@ namespace Bibloteca.Servicio.Servicio
 {
     public interface IPrestamoServicio
     {
-        IEnumerable<Prestamo> GetPrestamos();
-        Task<Prestamo> Get(int id);
+        IEnumerable<Reporte> GetPrestamos();
+        Reporte Get(int id);
         void Add(Prestamo prestamo);
         Task<Prestamo> Update(Prestamo prestamo);
 
@@ -29,12 +29,12 @@ namespace Bibloteca.Servicio.Servicio
             _prestamoRepositorio.Insert(prestamo);
         }
 
-        public Task<Prestamo> Get(int id)
+        public Reporte Get(int id)
         {
-            return null;
+            return _prestamoRepositorio.Get(id);
         }
 
-        public IEnumerable<Prestamo> GetPrestamos()
+        public IEnumerable<Reporte> GetPrestamos()
         {
             return _prestamoRepositorio.GetTodos();
 

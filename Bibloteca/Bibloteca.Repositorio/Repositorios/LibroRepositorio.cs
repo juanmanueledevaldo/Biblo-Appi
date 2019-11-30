@@ -20,13 +20,15 @@ namespace Bibloteca.Repositorio.Repositorios
         private readonly DatosDbContext _db = new DatosDbContext();
         public Libro Get(int id)
         {
-            return _db.Libro.FirstOrDefaultAsync(li => li.Id == id).Result;
+            Libro libro = new Libro();
+            libro = _db.Libro.FirstOrDefaultAsync(li => li.Id == id).Result;
+            return libro;
         }
 
         public IEnumerable<Libro> GetTodos()
         {
+            
             return _db.Libro;
-
         }
 
         public int Insert(Libro libro)

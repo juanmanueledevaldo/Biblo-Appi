@@ -100,7 +100,7 @@ namespace Bibloteca.Controllers
             catch (Exception e)
             {
 
-                throw;
+                return BadRequest(e);
             }
         }
 

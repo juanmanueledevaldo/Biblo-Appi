@@ -13,15 +13,58 @@ namespace Bibloteca.Repositorio.Repositorios
     {
         int Insert(Prestamo prestamo);
         Task<Prestamo> Update(Prestamo prestamo);
-        IEnumerable<Prestamo> GetTodos();
+        IEnumerable<Reporte> GetTodos();
+        Reporte Get(int id);
     }
     public class PrestamoRepositorio:IPrestamoRepositorio
     {
         private readonly DatosDbContext _db = new DatosDbContext();
 
-        public IEnumerable<Prestamo> GetTodos()
+        public Reporte Get(int id)
         {
-            return _db.Prestamo;
+            var reporte = from lib in _db.Libro
+                           join det in _db.Detalle
+                           on lib.Id equals det.Libroi
+                           join pre in _db.Prestamo
+                           on det.Prestamoi equals pre.Id
+                           join usu in _db.Usuario
+                           on pre.Usuarioi equals usu.Id
+                           where (pre.Id == id)
+                           select new Reporte
+                           {
+                               Id = pre.Id,
+                               Folio = pre.Folio,
+                               Nombres = $"{usu.Nombre} {usu.Apellido}",
+                               Fecha = pre.Fecha,
+                               Devolucion = pre.Devolucion,
+                               Estado = pre.Estado,
+                               Pedido = lib.Nombre,
+
+                           };
+            return reporte.FirstOrDefault();
+        }
+
+        public IEnumerable<Reporte> GetTodos()
+        {
+            var reportes = from lib in _db.Libro
+                          join det in _db.Detalle
+                          on lib.Id equals det.Libroi
+                          join pre in _db.Prestamo
+                          on det.Prestamoi equals pre.Id
+                          join usu in _db.Usuario
+                          on pre.Usuarioi equals usu.Id
+                          select new Reporte
+                          {
+                              Id = pre.Id,
+                              Folio = pre.Folio,
+                              Nombres = $"{usu.Nombre} {usu.Apellido}",
+                              Fecha = pre.Fecha,
+                              Devolucion = pre.Devolucion,
+                              Estado = pre.Estado,
+                              Pedido = lib.Nombre,
+                              
+                          };
+            return reportes;
         }
 
         public int Insert(Prestamo prestamo)
