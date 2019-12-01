@@ -17,9 +17,11 @@ namespace Bibloteca.Controllers
     {
         // GET: api/Usuario
         private readonly IUsuarioServicio _usuarioServicio;
-        public UsuarioController(IUsuarioServicio userService)
+        private readonly IEmailSender _emailSender;
+        public UsuarioController(IUsuarioServicio userService, IEmailSender emailSender)
         {
             this._usuarioServicio = userService;
+            this._emailSender = emailSender;
         }
         [HttpGet]
         //[Authorize]
@@ -27,7 +29,7 @@ namespace Bibloteca.Controllers
         {
             try
             {
-               
+
                 return Ok(_usuarioServicio.GetUsuarios());
 
             }
@@ -38,12 +40,21 @@ namespace Bibloteca.Controllers
             }
         }
 
+        public async Task <IActionResult>SendEmail ()
+        {
+            await _emailSender.SendEmailAsync("3amprg.gomez.vallejo.rodrigo@gmail.com", "Recado", "Este es un imail").ConfigureAwait(false);
+            return View();
+                
+                }
+
         // GET: api/Usuario/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             return Ok(_usuarioServicio.Get(id));
         }
+
+        
         // POST: api/Usuario
         [HttpPost]
         public IActionResult Post([FromBody]Usuario value)
