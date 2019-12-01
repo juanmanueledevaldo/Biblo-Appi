@@ -54,6 +54,9 @@ namespace Bibloteca
             //detalle
             services.AddTransient<IDetalleRepositorio, DetalleRepositorio>();
             services.AddTransient<IDetalleServicio,DetalleServicio>();
+            //correo
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<EmailSenderOptions>(Configuration.GetSection("EmailSenderOptions"));
 
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
