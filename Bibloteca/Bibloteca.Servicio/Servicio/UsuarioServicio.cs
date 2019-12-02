@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Bibloteca.Modelo.Modelo;
@@ -17,6 +19,7 @@ namespace Bibloteca.Servicio.Servicio
         Usuario Login(Login login);
        
     }
+
     public class UsuarioServicio : IUsuarioServicio
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
@@ -50,5 +53,7 @@ namespace Bibloteca.Servicio.Servicio
         {
             return _usuarioRepositorio.Update(usuario);
         }
+      
     }
+    
 }
