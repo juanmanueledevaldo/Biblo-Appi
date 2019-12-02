@@ -26,7 +26,7 @@ namespace Bibloteca.Controllers
         }
         // GET: api/Login
         [HttpGet]
-        //[Authorize]
+        [Authorize(Roles = "Admin") ]
         public Object Get(int id)
         {
            

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
@@ -9,8 +10,6 @@ namespace Bibloteca.Modelo.Modelo
 {
     public class Usuario
     {
-        public static string mote;
-        public static string contrasenia;
 
         [Key]
         public int Id { get; set; }
