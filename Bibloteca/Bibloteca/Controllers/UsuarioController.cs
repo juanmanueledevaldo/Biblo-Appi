@@ -41,12 +41,7 @@ namespace Bibloteca.Controllers
             }
         }
 
-        public async Task <IActionResult>SendEmail ()
-        {
-            await _emailSender.SendEmailAsync("3amprg.gomez.vallejo.rodrigo@gmail.com", "Recado", "Este es un imail").ConfigureAwait(false);
-            return View();
-                
-                }
+       
 
         // GET: api/Usuario/5
         [HttpGet("{id}")]
