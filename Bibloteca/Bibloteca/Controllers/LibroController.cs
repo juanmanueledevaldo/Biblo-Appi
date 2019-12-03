@@ -14,9 +14,23 @@ namespace Bibloteca.Controllers
     public class LibroController : Controller
     {
         private readonly ILibroServicio _libroServicio;
-        public LibroController(ILibroServicio libroServicio)
+        private readonly IExcelServicio _excelServicio;
+        public LibroController(ILibroServicio libroServicio,  IExcelServicio excelServicio)
         {
             this._libroServicio = libroServicio;
+            this._excelServicio = excelServicio;
+        }
+        [HttpGet]
+        [Route("GetReporte")]
+        public IActionResult GetReporte()
+        {
+            byte[] fileContents = _excelServicio.Get();
+
+            return File(
+                    fileContents: fileContents,
+                    contentType: "application/vnd.ms-excel",
+                    fileDownloadName: "test.xlsx"
+                    );
         }
         // GET: api/Libro
         [HttpGet]
