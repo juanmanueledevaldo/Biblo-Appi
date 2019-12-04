@@ -123,29 +123,20 @@ namespace Bibloteca.Repositorio.Migrations
 
                     b.Property<bool>("Activo");
 
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<string>("Apellido");
 
                     b.Property<bool>("Borrado");
 
-                    b.Property<string>("Contrasenia")
-                        .IsRequired()
-                        .HasMaxLength(10);
+                    b.Property<string>("Contrasenia");
 
                     b.Property<string>("Discriminator")
                         .IsRequired();
 
-                    b.Property<string>("Mote")
-                        .IsRequired()
-                        .HasMaxLength(25);
+                    b.Property<string>("Mote");
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<string>("Nombre");
 
-                    b.Property<string>("Tipo")
-                        .IsRequired();
+                    b.Property<string>("Tipo");
 
                     b.HasKey("Id");
 

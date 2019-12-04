@@ -15,7 +15,7 @@ namespace Bibloteca.Controllers
     {
         private readonly IPrestamoServicio _prestamoServicio;
         private readonly IDetalleServicio _detalleServicio;
-        private readonly IEmailSender _emailSender;
+     
         public PrestamoController(IPrestamoServicio prestamoServicio, IDetalleServicio detalleServicio)
         {
             _prestamoServicio = prestamoServicio;
@@ -46,7 +46,7 @@ namespace Bibloteca.Controllers
                 try
                 {
                     _prestamoServicio.Add(value);
-                await SendEmail();
+                    
                     return Ok(200);
                 }
                 catch (Exception e)
@@ -56,12 +56,7 @@ namespace Bibloteca.Controllers
             
           
         }
-        public async Task<IActionResult> SendEmail()
-        {
-            await _emailSender.SendEmailAsync("3amprg.gomez.vallejo.rodrigo@gmail.com", "Recado", "Este es un email").ConfigureAwait(false);
-            return Ok(200);
-
-        }
+     
         // PUT: api/Prestamo/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Prestamo value)

@@ -6,13 +6,14 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
 namespace Bibloteca.Repositorio.Migrations
 {
     [DbContext(typeof(DatosDbContext))]
-    [Migration("20191121221937_gfffffff")]
-    partial class gfffffff
+    [Migration("20191203235559_Todo")]
+    partial class Todo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,30 +124,57 @@ namespace Bibloteca.Repositorio.Migrations
 
                     b.Property<bool>("Activo");
 
-                    b.Property<string>("Apellido")
-                        .IsRequired()
-                        .HasMaxLength(100);
+                    b.Property<string>("Apellido");
 
                     b.Property<bool>("Borrado");
 
-                    b.Property<string>("Contraseña")
-                        .IsRequired()
-                        .HasMaxLength(10);
+                    b.Property<string>("Contrasenia");
 
-                    b.Property<string>("Mote")
-                        .IsRequired()
-                        .HasMaxLength(25);
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<string>("Tipo")
+                    b.Property<string>("Discriminator")
                         .IsRequired();
+
+                    b.Property<string>("Mote");
+
+                    b.Property<string>("Nombre");
+
+                    b.Property<string>("Tipo");
 
                     b.HasKey("Id");
 
                     b.ToTable("Usuario");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+                });
+
+            modelBuilder.Entity("Bibloteca.Modelo.Modelo.Estudiante", b =>
+                {
+                    b.HasBaseType("Bibloteca.Modelo.Modelo.Usuario");
+
+                    b.Property<string>("Carrera")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("Cuatrimestre");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Grupo")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Matricula")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.ToTable("Estudiante");
+
+                    b.HasDiscriminator().HasValue("Estudiante");
                 });
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Detalle", b =>
