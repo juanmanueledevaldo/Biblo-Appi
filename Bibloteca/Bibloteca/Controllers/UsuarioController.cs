@@ -46,7 +46,7 @@ namespace Bibloteca.Controllers
 
         // GET: api/Usuario/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Usuario id)
         {
             return Ok(_usuarioServicio.Get(id));
         }

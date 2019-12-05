@@ -50,7 +50,7 @@ namespace Bibloteca.Controllers
 
         // GET: api/Libro/5
         [HttpGet("{id}")]
-        public IActionResult Get(Libro id)
+        public IActionResult Get(int id)
         {
             return Ok(_libroServicio.Get(id));
         }
@@ -71,7 +71,7 @@ namespace Bibloteca.Controllers
         }
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(Libro id)
+        public IActionResult Delete(int id)
         {
             try
             {

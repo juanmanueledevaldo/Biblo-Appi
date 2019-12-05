@@ -12,16 +12,16 @@ namespace Bibloteca.Repositorio.Repositorios
     public interface ILibroRepositorio
     {
         IEnumerable<Libro> GetTodos();
-        Libro Get(Libro id);
+        Libro Get(int id);
         int Insert(Libro libro);
         Libro Update(Libro libro);
-        bool Delete(Libro id);
+        bool Delete(int id);
     }
     public class LibroRepositorio : ILibroRepositorio
     {
         private readonly DatosDbContext _db = new DatosDbContext();
 
-        public bool Delete(Libro id)
+        public bool Delete(int id)
         {
             var lib = Get(id);
             lib.Borrado = !lib.Borrado;
@@ -30,10 +30,10 @@ namespace Bibloteca.Repositorio.Repositorios
             return true;
         }
 
-        public Libro Get(Libro id)
+        public Libro Get(int id)
         {
             Libro libro = new Libro();
-            libro = _db.Libro.FirstOrDefaultAsync(li => li.Id == id.Id).Result;
+            libro = _db.Libro.FirstOrDefault(li => li.Id == id);
             return libro;
         }
 

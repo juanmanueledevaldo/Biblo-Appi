@@ -27,7 +27,7 @@ namespace Bibloteca.Controllers
         // GET: api/Login
         [HttpGet]
         //[Authorize(Roles = "Admin") ]
-        public Object Get(int id)
+        public Object Get(Usuario id)
         {
            
             var userClaims = HttpContext.User.Claims;
