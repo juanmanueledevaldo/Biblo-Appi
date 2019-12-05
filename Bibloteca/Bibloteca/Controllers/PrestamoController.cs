@@ -40,7 +40,7 @@ namespace Bibloteca.Controllers
         
         // POST: api/Prestamo
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]Prestamo value)
+        public IActionResult Post([FromBody]Prestamo value)
         {
 
                 try

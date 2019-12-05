@@ -11,7 +11,7 @@ namespace Bibloteca.Repositorio.Repositorios
 {
     public interface IUsuarioRepositorio
     {
-        IEnumerable<Usuario> GetTodos();
+       Usuario GetTodos();
         Task<Usuario> Get(int id);
         int Insert(Usuario usuario);
         Task<Usuario> Update(Usuario usuario);
@@ -43,9 +43,21 @@ namespace Bibloteca.Repositorio.Repositorios
             return _db.Usuario.FirstOrDefaultAsync(us => us.Id == id);
         }
 
-        public IEnumerable<Usuario> GetTodos()
+        public Usuario GetTodos()
         {
-            return _db.Usuario;
+            var usuarios = from usu in _db.Usuario
+                         
+                         
+                          select new Usuario
+                          {
+                              Id = usu.Id,
+                              Mote = usu.Mote,
+                              Nombre = usu.Nombre,
+                              Apellido = usu.Apellido,
+                              Tipo = usu.Tipo 
+
+                          };
+            return usuarios.FirstOrDefault();
         }
 
         public int Insert(Usuario usuario)

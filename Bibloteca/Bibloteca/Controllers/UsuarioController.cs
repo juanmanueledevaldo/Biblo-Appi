@@ -25,13 +25,13 @@ namespace Bibloteca.Controllers
             
         }
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IActionResult Get()
         {
             try
             {
-                var userClaims = HttpContext.User.Claims;
-                int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+                //var userClaims = HttpContext.User.Claims;
+                //int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
                 return Ok(_usuarioServicio.GetUsuarios());
 
             }
