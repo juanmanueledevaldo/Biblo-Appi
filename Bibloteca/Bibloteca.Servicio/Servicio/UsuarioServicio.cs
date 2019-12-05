@@ -13,10 +13,11 @@ namespace Bibloteca.Servicio.Servicio
     public interface IUsuarioServicio
     {
       Usuario GetUsuarios();
-        Usuario Get(int id);
+        Usuario Get(Usuario id);
         void Add(Usuario usuario);
-        Task<Usuario> Update(Usuario usuario);
+        Usuario Update(Usuario usuario);
         Usuario Login(Login login);
+        bool Delete(Usuario id);
        
     }
 
@@ -32,9 +33,15 @@ namespace Bibloteca.Servicio.Servicio
         {
             _usuarioRepositorio.Insert(usuario);
         }
-        public Usuario Get(int id)
+
+        public bool Delete(Usuario id)
         {
-            return _usuarioRepositorio.Get(id).Result;
+            return _usuarioRepositorio.Delete(id);
+        }
+
+        public Usuario Get(Usuario id)
+        {
+            return _usuarioRepositorio.Get(id);
 
         }
 
@@ -49,7 +56,7 @@ namespace Bibloteca.Servicio.Servicio
             return _usuarioRepositorio.GetLogin(login);
         }
 
-        public Task<Usuario> Update(Usuario usuario)
+        public Usuario Update(Usuario usuario)
         {
             return _usuarioRepositorio.Update(usuario);
         }

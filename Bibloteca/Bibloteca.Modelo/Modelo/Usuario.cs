@@ -10,7 +10,8 @@ namespace Bibloteca.Modelo.Modelo
 {
     public class Usuario
     {
-        
+       
+
         [Key]
         public int Id { get; set; }
         //[MaxLength(25), Required(ErrorMessage = "Se necesita un nombre de usurio")]
