@@ -10,7 +10,7 @@ namespace Bibloteca.Repositorio.Datos
     class DatosDbContext : DbContext
     {
         private readonly string cadena1 = "Data Source = .; Initial Catalog = EPBIBLIOTECA; Integrated Security = True";
-        private readonly string cadena = "data source=.;Initial catalog=EPBIBLIOTECA;user id=sa; password=uts;";
+        private readonly string cadena = "data source=(local);Initial catalog=EPBIBLIOTECA;user id=sa; password=rodrigo;";
 
 
         public DatosDbContext()
@@ -26,7 +26,7 @@ namespace Bibloteca.Repositorio.Datos
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(cadena1
+                optionsBuilder.UseSqlServer(cadena
                     );
             }
         }
