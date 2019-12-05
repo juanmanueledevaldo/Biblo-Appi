@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bibloteca.Controllers
 {
-    [Authorize (Roles =  "Admin")]
+    //[Authorize (Roles =  "Admin")]
     [Produces("application/json")]
     [Route("api/Usuario")]
     public class UsuarioController : Controller

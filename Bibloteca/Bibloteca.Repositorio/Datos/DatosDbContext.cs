@@ -15,7 +15,7 @@ namespace Bibloteca.Repositorio.Datos
 
         public DatosDbContext()
         {
-
+            
         }
         
         public DatosDbContext(DbContextOptions options) : base(options)
@@ -26,7 +26,7 @@ namespace Bibloteca.Repositorio.Datos
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(cadena
+                optionsBuilder.UseSqlServer(cadena1
                     );
             }
         }
