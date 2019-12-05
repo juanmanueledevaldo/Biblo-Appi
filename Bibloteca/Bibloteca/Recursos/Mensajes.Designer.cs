@@ -61,6 +61,24 @@ namespace Bibloteca.Recursos {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ha ocurrido un error al querer eliminar un libro.
+        /// </summary>
+        public static string LibrosBorradosError {
+            get {
+                return ResourceManager.GetString("LibrosBorradosError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ha ocurrido un error al eliminar un libro.
+        /// </summary>
+        public static string LibrosError {
+            get {
+                return ResourceManager.GetString("LibrosError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Ha ocurrido un error al consultar el nombre de usuario y contraseña.
         /// </summary>
         public static string LoginError {
@@ -75,6 +93,15 @@ namespace Bibloteca.Recursos {
         public static string UsuarioError {
             get {
                 return ResourceManager.GetString("UsuarioError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Ha ocurrido un error al querer eliminar el usuario.
+        /// </summary>
+        public static string UsuariosEliminadoError {
+            get {
+                return ResourceManager.GetString("UsuariosEliminadoError", resourceCulture);
             }
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bibloteca.Modelo.Modelo;
+using Bibloteca.Recursos;
 using Bibloteca.Servicio.Servicio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,7 +50,7 @@ namespace Bibloteca.Controllers
 
         // GET: api/Libro/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(Libro id)
         {
             return Ok(_libroServicio.Get(id));
         }
@@ -70,8 +71,19 @@ namespace Bibloteca.Controllers
         }
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(Libro id)
         {
+            try
+            {
+                if (_libroServicio.Delete(id))
+                    return Ok();
+                else return BadRequest(Mensajes.LibrosBorradosError);
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e);
+            }
         }
     }
 }

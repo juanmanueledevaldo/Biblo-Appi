@@ -11,9 +11,10 @@ namespace Bibloteca.Servicio.Servicio
     public interface ILibroServicio
     {
         IEnumerable<Libro> GetLibros();
-        Libro Get(int id);
+        Libro Get(Libro id);
         void Add(Libro libro);
-        Task<Libro> Update(Libro libro);
+        Libro Update(Libro libro);
+        bool Delete(Libro id);
     }
     public class LibroServicio : ILibroServicio
     {
@@ -27,7 +28,13 @@ namespace Bibloteca.Servicio.Servicio
         {
             _libroRepositorio.Insert(libro);
         }
-        public Libro Get(int id)
+
+        public bool Delete(Libro id)
+        {
+            return _libroRepositorio.Delete(id);
+        }
+
+        public Libro Get(Libro id)
         {
             return _libroRepositorio.Get(id);
         }
@@ -37,7 +44,7 @@ namespace Bibloteca.Servicio.Servicio
             return _libroRepositorio.GetTodos();
         }
 
-        public Task<Libro> Update(Libro libro)
+        public Libro Update(Libro libro)
         {
             return _libroRepositorio.Update(libro);
         }

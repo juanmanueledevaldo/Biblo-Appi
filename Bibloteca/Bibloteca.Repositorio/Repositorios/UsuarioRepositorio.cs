@@ -12,23 +12,30 @@ namespace Bibloteca.Repositorio.Repositorios
     public interface IUsuarioRepositorio
     {
        Usuario GetTodos();
-        Task<Usuario> Get(int id);
+        Usuario Get(Usuario id);
         int Insert(Usuario usuario);
-        Task<Usuario> Update(Usuario usuario);
+        Usuario Update(Usuario usuario);
         Usuario GetLogin(Login logeado);
+        bool Delete(Usuario id);
     }
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
         private readonly DatosDbContext _db = new DatosDbContext();
 
-        public int Delete(int id)
+        public bool Delete(Usuario id)
         {
-        //    Usuario usuario = new Usuario();
-        //Task<Usuario> usuarioTask = _db.Usuario.FirstOrDefaultAsync(us => us.Id == id);
-        //usuario = usuarioTask.Result;
-        //    _db.Usuario.Remove(usuario);
-        //    _db.SaveChanges();
-            return 1;
+            //    Usuario usuario = new Usuario();
+            //Task<Usuario> usuarioTask = _db.Usuario.FirstOrDefaultAsync(us => us.Id == id);
+            //usuario = usuarioTask.Result;
+            //    _db.Usuario.Remove(usuario);
+            //    _db.SaveChanges();
+
+            var user = Get(id);
+            user.Activo = !user.Activo;
+            _db.Usuario.Update(user);
+            _db.SaveChanges();
+            return true;
+           
         }
         public Usuario GetLogin(Login logeado)
         {
@@ -38,9 +45,9 @@ namespace Bibloteca.Repositorio.Repositorios
             return null;
         }
 
-    public Task<Usuario> Get(int id)
+    public Usuario Get(Usuario id)
         {
-            return _db.Usuario.FirstOrDefaultAsync(us => us.Id == id);
+            return _db.Usuario.FirstOrDefault(us => us.Id == id.Id);
         }
 
         public Usuario GetTodos()
@@ -68,18 +75,20 @@ namespace Bibloteca.Repositorio.Repositorios
                 return 1;
         }
 
-        public Task<Usuario> Update(Usuario usuario)
+        public Usuario Update(Usuario usuario)
         {
             try
             {
                 _db.Entry(usuario).State = EntityState.Modified;
                 _db.SaveChanges();
-                return _db.Usuario.FirstOrDefaultAsync(us => us.Mote == usuario.Mote);
+                return _db.Usuario.FirstOrDefault(us => us.Id == usuario.Id);
             }
             catch (Exception)
             {
                 return null;
             }
         }
+
+       
     }
 }
