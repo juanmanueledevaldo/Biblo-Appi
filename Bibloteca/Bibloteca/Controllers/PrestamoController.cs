@@ -15,6 +15,7 @@ namespace Bibloteca.Controllers
     {
         private readonly IPrestamoServicio _prestamoServicio;
         private readonly IDetalleServicio _detalleServicio;
+     
         public PrestamoController(IPrestamoServicio prestamoServicio, IDetalleServicio detalleServicio)
         {
             _prestamoServicio = prestamoServicio;
@@ -39,20 +40,23 @@ namespace Bibloteca.Controllers
         
         // POST: api/Prestamo
         [HttpPost]
-        public IActionResult Post([FromBody]Prestamo value)
+        public async Task<IActionResult> PostAsync([FromBody]Prestamo value)
         {
 
                 try
                 {
                     _prestamoServicio.Add(value);
+                    
                     return Ok(200);
                 }
                 catch (Exception e)
                 {
                     return BadRequest(e);
                 }
+            
+          
         }
-        
+     
         // PUT: api/Prestamo/5
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]Prestamo value)

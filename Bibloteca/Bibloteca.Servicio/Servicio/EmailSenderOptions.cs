@@ -1,49 +1,51 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bibloteca.Servicio.Servicio
+namespace WarehouseProject.Service.Service
 {
     public class EmailSenderOptions
     {
-        public int Port { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public bool EnableSsl { get; set; }
-        public string Host { get; set; }
-    }
-    public interface IEmailSender
-    {
-        Task SendEmailAsync(string email, string subject, string message);
-    }
-    public class EmailSender : IEmailSender
-    {
-        private SmtpClient Cliente { get; }
-        private EmailSenderOptions Options { get; }
+        string host = "3amprg.gomez.vallejo.rodrigo.gmail.com";
+        int port = 587;
+        string user = "rodrigogomez1234";//aqui va el correo
+        private readonly string password = "";//aqui va el password del correo
 
-        public EmailSender(IOptions<EmailSenderOptions> options)
+
+
+        private SmtpClient cliente;
+      
+        private MailMessage email;
+        public void GestorCorreo()
         {
-            Options = options.Value;
-            Cliente = new SmtpClient()
+            cliente = new SmtpClient(host, port)
             {
-                Host = Options.Host,
-                Port = Options.Port,
+                EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(Options.Email, Options.Password),
-                EnableSsl = Options.EnableSsl,
+                Credentials = new NetworkCredential(user, password)
             };
         }
-
-        public Task SendEmailAsync(string email, string subject, string message)
+        public void EnviarCorreo(string destinatario, string asunto, string mensaje, bool esHtlm = false)
         {
-            var correo = new MailMessage(from: Options.Email, to: email, subject: subject, body: message);
-            correo.IsBodyHtml = true;
-            return Cliente.SendMailAsync(correo);
+            GestorCorreo();
+            email = new MailMessage(user, destinatario, asunto, mensaje);
+            email.IsBodyHtml = esHtlm;
+
+            cliente.Send(email);
+        }
+        public void EnviarCorreo(MailMessage message)
+        {
+            cliente.Send(message);
+        }
+        public async Task EnviarCorreoAsync(MailMessage message)
+        {
+            await cliente.SendMailAsync(message);
         }
     }
 }

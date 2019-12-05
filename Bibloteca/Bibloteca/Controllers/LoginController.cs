@@ -26,7 +26,7 @@ namespace Bibloteca.Controllers
         }
         // GET: api/Login
         [HttpGet]
-        [Authorize(Roles = "Admin") ]
+        //[Authorize(Roles = "Admin") ]
         public Object Get(int id)
         {
            
@@ -70,11 +70,16 @@ namespace Bibloteca.Controllers
         public IActionResult Post([FromBody]Login value)
         {
             try
+
             {
                 Usuario userExistente = _usuarioServicio.Login(value);
-                if (userExistente ==null)
+                if (userExistente.Mote  ==null )
                 {
-                    return BadRequest(Mensajes.LoginError);
+                    if (userExistente.Contrasenia == null)
+                    {
+                        return BadRequest(Mensajes.LoginError);
+                    }
+                    else { return BadRequest(Mensajes.LoginError); }
                 }
                 else
                 {

@@ -33,8 +33,9 @@ namespace Bibloteca.Repositorio.Repositorios
         public Usuario GetLogin(Login logeado)
         {
 
-            var login = _db.Usuario;
-            return login.Where(x => x.Mote == logeado.Mote && x.Contrasenia == logeado.Contrasenia ).FirstOrDefault();
+
+            List<Usuario> login = _db.Usuario.ToList<Usuario>();
+            return null;
         }
 
     public Task<Usuario> Get(int id)

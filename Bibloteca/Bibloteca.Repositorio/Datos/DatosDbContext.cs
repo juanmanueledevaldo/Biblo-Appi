@@ -10,7 +10,7 @@ namespace Bibloteca.Repositorio.Datos
     class DatosDbContext : DbContext
     {
         private readonly string cadena1 = "Data Source = .; Initial Catalog = EPBIBLIOTECA; Integrated Security = True";
-        private readonly string cadena = "data source=(local);Initial catalog=EPBIBLIOTECA;user id=sa; password=rodrigo;";
+        private readonly string cadena = "data source=.;Initial catalog=EPBIBLIOTECA;user id=sa; password=uts;";
 
 
         public DatosDbContext()
