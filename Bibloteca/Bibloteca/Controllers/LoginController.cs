@@ -58,11 +58,33 @@ namespace Bibloteca.Controllers
 
         // GET: api/Login/5
        
-        [HttpGet("{id}")]
-        public string Get(string nombre)
+        [HttpGet]
+        [Authorize]
+        public IActionResult IsAdmin()
         {
-            return "value";
-            } 
+
+            try
+            {
+
+                var claims = HttpContext.User.Claims;
+              
+                var tip = HttpContext.User.Claims.FirstOrDefault(x => x.Type  == ClaimTypes.Role).Value;
+                if (tip == "Admin")
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("No eres Admin");
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest();
+            }
+        } 
         
         // POST: api/Login
         [HttpPost]
