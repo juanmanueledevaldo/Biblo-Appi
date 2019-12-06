@@ -25,34 +25,34 @@ namespace Bibloteca.Controllers
             _usuarioServicio = usuarioServicio;
         }
         // GET: api/Login
-        [HttpGet]
+        //[HttpGet]
         //[Authorize(Roles = "Admin") ]
-        public Object Get(Usuario id)
-        {
+        //public Object Get(Usuario id)
+        //{
            
-            var userClaims = HttpContext.User.Claims;
+        //    var userClaims = HttpContext.User.Claims;
 
-            if (User == null)
-            {
-                return BadRequest("Error no se ha logeado");
-            }
-            else
-            {
-                int userID = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-                var user = _usuarioServicio.Get(id);
-                return new
-                {
-                    user.Mote,
-                    user.Nombre,
-                    user.Tipo
+        //    if (User == null)
+        //    {
+        //        return BadRequest("Error no se ha logeado");
+        //    }
+        //    else
+        //    {
+        //        int userID = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+        //        var user = _usuarioServicio.Get(id);
+        //        return new
+        //        {
+        //            user.Mote,
+        //            user.Nombre,
+        //            user.Tipo
                    
-                };
+        //        };
 
                
-            }
+        //    }
                   
                 
-            }
+        //    }
            
           
 
@@ -60,7 +60,8 @@ namespace Bibloteca.Controllers
        
         [HttpGet]
         [Authorize]
-        public IActionResult IsAdmin()
+        //[Route("Admin")]
+        public IActionResult Admin()
         {
 
             try
@@ -69,9 +70,9 @@ namespace Bibloteca.Controllers
                 var claims = HttpContext.User.Claims;
               
                 var tip = HttpContext.User.Claims.FirstOrDefault(x => x.Type  == ClaimTypes.Role).Value;
-                if (tip == "Admin")
+                if (tip == "A")
                 {
-                    return Ok();
+                    return Ok("Bienvenido");
                 }
                 else
                 {
@@ -109,7 +110,7 @@ namespace Bibloteca.Controllers
 
                     List<Claim> claims = new List<Claim>();
                     //se añade el rol al claim
-                    claims.Add(new Claim(ClaimTypes.Role, Convert.ToString(userExistente.Tipo)));
+                    claims.Add(new Claim(ClaimTypes.Role, Convert.ToString(userExistente.Tipo.FirstOrDefault())));
                     claims.Add(new Claim("Id",userExistente.Id.ToString()));
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImxvcXVlc2VhIiwiaWF0IjoxNTE2MjM5MDIyfQ.KI2p5vksjJRiO_1R7qSkmeGZchby9gpuJHLPPkh2EUg"));
                     JwtSecurityToken token = new JwtSecurityToken(
