@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Bibloteca.Repositorio.Migrations
 {
-    public partial class Todo : Migration
+    public partial class jju : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,21 +37,20 @@ namespace Bibloteca.Repositorio.Migrations
                 name: "Usuario",
                 columns: table => new
                 {
-                    Carrera = table.Column<string>(maxLength: 50, nullable: true),
-                    Cuatrimestre = table.Column<int>(nullable: true),
-                    Email = table.Column<string>(maxLength: 50, nullable: true),
-                    Grupo = table.Column<string>(maxLength: 20, nullable: true),
-                    Matricula = table.Column<string>(maxLength: 10, nullable: true),
-                    Telefono = table.Column<string>(maxLength: 20, nullable: true),
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Activo = table.Column<bool>(nullable: false),
                     Apellido = table.Column<string>(nullable: true),
                     Borrado = table.Column<bool>(nullable: false),
+                    Carrera = table.Column<string>(maxLength: 50, nullable: false),
                     Contrasenia = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
+                    Cuatrimestre = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(maxLength: 50, nullable: false),
+                    Grupo = table.Column<string>(maxLength: 20, nullable: false),
+                    Matricula = table.Column<string>(maxLength: 10, nullable: false),
                     Mote = table.Column<string>(nullable: true),
                     Nombre = table.Column<string>(nullable: true),
+                    Telefono = table.Column<string>(maxLength: 20, nullable: false),
                     Tipo = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

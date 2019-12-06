@@ -12,7 +12,7 @@ namespace Bibloteca.Servicio.Servicio
 {
     public interface IUsuarioServicio
     {
-      Usuario GetUsuarios();
+        IEnumerable < Usuario >GetTodos();
         Usuario Get(Usuario id);
         void Add(Usuario usuario);
         Usuario Update(Usuario usuario);
@@ -45,7 +45,7 @@ namespace Bibloteca.Servicio.Servicio
 
         }
 
-        public Usuario GetUsuarios()
+        public IEnumerable< Usuario >GetTodos()
         {
             return _usuarioRepositorio.GetTodos();
 

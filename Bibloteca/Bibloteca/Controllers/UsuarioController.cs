@@ -32,7 +32,7 @@ namespace Bibloteca.Controllers
             {
                 //var userClaims = HttpContext.User.Claims;
                 //int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-                return Ok(_usuarioServicio.GetUsuarios());
+                return Ok(_usuarioServicio.GetTodos());
 
             }
             catch (Exception)

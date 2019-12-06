@@ -6,14 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
-using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 
 namespace Bibloteca.Repositorio.Migrations
 {
     [DbContext(typeof(DatosDbContext))]
-    [Migration("20191203235559_Todo")]
-    partial class Todo
+    [Migration("20191206011647_jju")]
+    partial class jju
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -128,31 +127,11 @@ namespace Bibloteca.Repositorio.Migrations
 
                     b.Property<bool>("Borrado");
 
-                    b.Property<string>("Contrasenia");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
-
-                    b.Property<string>("Mote");
-
-                    b.Property<string>("Nombre");
-
-                    b.Property<string>("Tipo");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Usuario");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
-                });
-
-            modelBuilder.Entity("Bibloteca.Modelo.Modelo.Estudiante", b =>
-                {
-                    b.HasBaseType("Bibloteca.Modelo.Modelo.Usuario");
-
                     b.Property<string>("Carrera")
                         .IsRequired()
                         .HasMaxLength(50);
+
+                    b.Property<string>("Contrasenia");
 
                     b.Property<int>("Cuatrimestre");
 
@@ -168,13 +147,19 @@ namespace Bibloteca.Repositorio.Migrations
                         .IsRequired()
                         .HasMaxLength(10);
 
+                    b.Property<string>("Mote");
+
+                    b.Property<string>("Nombre");
+
                     b.Property<string>("Telefono")
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.ToTable("Estudiante");
+                    b.Property<string>("Tipo");
 
-                    b.HasDiscriminator().HasValue("Estudiante");
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("Bibloteca.Modelo.Modelo.Detalle", b =>
