@@ -39,7 +39,7 @@ namespace Bibloteca.Controllers
             else
             {
                 int userID = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
-                var user = _usuarioServicio.Get(id);
+                var user = _usuarioServicio.Get(id.Id);
                 return new
                 {
                     user.Mote,

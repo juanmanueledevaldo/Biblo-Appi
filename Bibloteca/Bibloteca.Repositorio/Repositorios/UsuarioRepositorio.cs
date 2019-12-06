@@ -12,7 +12,7 @@ namespace Bibloteca.Repositorio.Repositorios
     public interface IUsuarioRepositorio
     {
         IEnumerable< Usuario> GetTodos();
-        Usuario Get(Usuario id);
+        Usuario Get(int id);
         int Insert(Usuario usuario);
         Usuario Update(Usuario usuario);
         Usuario GetLogin(Login logeado);
@@ -26,7 +26,7 @@ namespace Bibloteca.Repositorio.Repositorios
         {
    
     
-            var user = Get(id);
+            var user = Get(id.Id);
             user.Activo = !user.Activo;
             _db.Usuario.Update(user);
             _db.SaveChanges();
@@ -40,9 +40,9 @@ namespace Bibloteca.Repositorio.Repositorios
             return login.Where(x => x.Mote == logeado.Mote && x.Contrasenia == logeado.Contrasenia).FirstOrDefault();
         }
 
-    public Usuario Get(Usuario id)
+    public Usuario Get(int id)
         {
-            return _db.Usuario.FirstOrDefault(us => us.Id == id.Id);
+            return _db.Usuario.FirstOrDefault(us => us.Id == id);
         }
 
         public IEnumerable< Usuario >GetTodos()

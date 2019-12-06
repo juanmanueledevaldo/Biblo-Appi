@@ -11,7 +11,7 @@ namespace Bibloteca.Servicio.Servicio
     {
         void Add(Detalle detalle);
         int Remove(int id);
-        IEnumerable<Libro> GetDetalles();
+        IEnumerable<Pendiente> GetDetalles();
     }
     public class DetalleServicio : IDetalleServicio
     {
@@ -26,7 +26,7 @@ namespace Bibloteca.Servicio.Servicio
             
         }
 
-        public IEnumerable<Libro> GetDetalles()
+        public IEnumerable<Pendiente> GetDetalles()
         {
             return _detalleRepositorio.GetAll();
         }

@@ -13,7 +13,7 @@ namespace Bibloteca.Repositorio.Repositorios
     {
         int Insert(Detalle detalle);
         int Delete(int id);
-        IEnumerable<Libro> GetAll();
+        IEnumerable<Pendiente> GetAll();
 
     }
     public class DetalleRepositorio : IDetalleRepositorio
@@ -30,27 +30,23 @@ namespace Bibloteca.Repositorio.Repositorios
             return 1;
         }
 
-        public IEnumerable<Libro> GetAll()
+        public IEnumerable<Pendiente> GetAll()
         {
             //return _db.Detalle;
             var Pendiente = from lib in _db.Libro
                             join det in _db.Detalle
                             on lib.Id equals det.Libroi
-                            select new Libro
+                            select new Pendiente
                             {
                                 Id=lib.Id,
-                                Anio = lib.Anio,
-                                Autor = lib.Autor,
-                                Borrado = lib.Borrado,
-                                Descripcion = lib.Descripcion,
-                                Editorial = lib.Editorial,
                                 Estante = lib.Estante,
                                 Folio = lib.Folio,
                                 Genero = lib.Genero,
                                 Imagen = lib.Imagen,
                                 Nombre = lib.Nombre,
-                                Paginas = lib.Paginas,
-                                Stock= lib.Stock
+                                Stock= lib.Stock,
+                                Detalle = det.Id,
+                                Comentario =""
                             };
                            
                             
