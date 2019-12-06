@@ -68,16 +68,9 @@ namespace Bibloteca.Controllers
             {
 
                 var claims = HttpContext.User.Claims;
-              
-                var tip = HttpContext.User.Claims.FirstOrDefault(x => x.Type  == ClaimTypes.Role).Value;
-                if (tip == "A")
-                {
-                    return Ok("Bienvenido");
-                }
-                else
-                {
-                    return BadRequest("No eres Admin");
-                }
+                var tip = HttpContext.User.Claims.FirstOrDefault(x => x.Type  == ClaimTypes.Role).Value; 
+               return Ok(tip);
+               
 
             }
             catch (Exception e)
@@ -110,8 +103,9 @@ namespace Bibloteca.Controllers
 
                     List<Claim> claims = new List<Claim>();
                     //se añade el rol al claim
-                    claims.Add(new Claim(ClaimTypes.Role, Convert.ToString(userExistente.Tipo.FirstOrDefault())));
+                    claims.Add(new Claim(ClaimTypes.Role, Convert.ToString(userExistente.Tipo)));
                     claims.Add(new Claim("Id",userExistente.Id.ToString()));
+                    claims.Add(new Claim("Mote",userExistente.Mote.ToString())); 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImxvcXVlc2VhIiwiaWF0IjoxNTE2MjM5MDIyfQ.KI2p5vksjJRiO_1R7qSkmeGZchby9gpuJHLPPkh2EUg"));
                     JwtSecurityToken token = new JwtSecurityToken(
                             claims: claims,
