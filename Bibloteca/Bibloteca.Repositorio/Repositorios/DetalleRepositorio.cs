@@ -3,6 +3,7 @@ using Bibloteca.Repositorio.Datos;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace Bibloteca.Repositorio.Repositorios
     {
         int Insert(Detalle detalle);
         int Delete(int id);
-        IEnumerable<Detalle> GetAll();
+        IEnumerable<Libro> GetAll();
 
     }
     public class DetalleRepositorio : IDetalleRepositorio
@@ -29,9 +30,34 @@ namespace Bibloteca.Repositorio.Repositorios
             return 1;
         }
 
-        public IEnumerable<Detalle> GetAll()
+        public IEnumerable<Libro> GetAll()
         {
-            return _db.Detalle;
+            //return _db.Detalle;
+            var Pendiente = from lib in _db.Libro
+                            join det in _db.Detalle
+                            on lib.Id equals det.Libroi
+                            select new Libro
+                            {
+                                Id=lib.Id,
+                                Anio = lib.Anio,
+                                Autor = lib.Autor,
+                                Borrado = lib.Borrado,
+                                Descripcion = lib.Descripcion,
+                                Editorial = lib.Editorial,
+                                Estante = lib.Estante,
+                                Folio = lib.Folio,
+                                Genero = lib.Genero,
+                                Imagen = lib.Imagen,
+                                Nombre = lib.Nombre,
+                                Paginas = lib.Paginas,
+                                Stock= lib.Stock
+                            };
+                           
+                            
+                           
+            return Pendiente;
+                      
+                      
         }
 
         public int Insert(Detalle detalle)
