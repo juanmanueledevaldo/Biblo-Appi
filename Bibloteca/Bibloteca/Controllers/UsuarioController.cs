@@ -84,7 +84,7 @@ namespace Bibloteca.Controllers
             return Ok(_usuarioServicio.Update(value));
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete(Usuario id)
+        public IActionResult Delete(int id)
         {
             try
             {
