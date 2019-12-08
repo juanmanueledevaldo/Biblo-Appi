@@ -17,7 +17,7 @@ namespace Bibloteca.Servicio.Servicio
         void Add(Usuario usuario);
         Usuario Update(Usuario usuario);
         Usuario Login(Login login);
-        bool Delete(Usuario id);
+        bool Delete(int id);
        
     }
 
@@ -34,7 +34,7 @@ namespace Bibloteca.Servicio.Servicio
             _usuarioRepositorio.Insert(usuario);
         }
 
-        public bool Delete(Usuario id)
+        public bool Delete(int id)
         {
             return _usuarioRepositorio.Delete(id);
         }

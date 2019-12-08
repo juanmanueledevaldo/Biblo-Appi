@@ -16,17 +16,17 @@ namespace Bibloteca.Repositorio.Repositorios
         int Insert(Usuario usuario);
         Usuario Update(Usuario usuario);
         Usuario GetLogin(Login logeado);
-        bool Delete(Usuario id);
+        bool Delete(int id);
     }
     public class UsuarioRepositorio : IUsuarioRepositorio
     {
         private readonly DatosDbContext _db = new DatosDbContext();
 
-        public bool Delete(Usuario id)
+        public bool Delete(int id)
         {
    
     
-            var user = Get(id.Id);
+            var user = Get(id);
             user.Activo = !user.Activo;
             _db.Usuario.Update(user);
             _db.SaveChanges();
