@@ -25,7 +25,7 @@ namespace Bibloteca.Controllers
         [Route("GetReporte")]
         public IActionResult GetReporte()
         {
-            byte[] fileContents = _excelServicio.Get();
+            byte[] fileContents = _excelServicio.GetExcelLoans();
 
             return File(
                     fileContents: fileContents,
