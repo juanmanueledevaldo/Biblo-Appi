@@ -42,7 +42,9 @@ namespace Bibloteca.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Prestamo value)
         {
-
+            //AÑADIR USUARIO
+            //AÑADIR LISTA DE DETALLES
+            //VALIDAR SI YA TIENE UN PRESTAMO ACTIVO
                 try
                 {
                     _prestamoServicio.Add(value);

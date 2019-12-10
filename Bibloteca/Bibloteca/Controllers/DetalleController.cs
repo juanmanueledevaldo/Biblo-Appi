@@ -14,9 +14,11 @@ namespace Bibloteca.Controllers
     public class DetalleController : Controller
     {
         private readonly IDetalleServicio _detalleServicio;
-        public DetalleController(IDetalleServicio detalleServicio)
+        private readonly ILibroServicio _libroServicio;
+        public DetalleController(IDetalleServicio detalleServicio,  ILibroServicio libroServicio)
         {
             this._detalleServicio = detalleServicio;
+            this._libroServicio= libroServicio;
         }
         // GET: api/Detalle
         [HttpGet]

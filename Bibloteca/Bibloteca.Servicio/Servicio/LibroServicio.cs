@@ -15,6 +15,8 @@ namespace Bibloteca.Servicio.Servicio
         void Add(Libro libro);
         Libro Update(Libro libro);
         bool Delete(int id);
+        void Restar(int id);
+        void Sumar(int id);
     }
     public class LibroServicio : ILibroServicio
     {
@@ -42,6 +44,16 @@ namespace Bibloteca.Servicio.Servicio
         public IEnumerable<Libro> GetLibros()
         {
             return _libroRepositorio.GetTodos();
+        }
+
+        public void Restar(int id)
+        {
+             _libroRepositorio.Restar(id);
+        }
+
+        public void Sumar(int id)
+        {
+             _libroRepositorio.Sumar(id);
         }
 
         public Libro Update(Libro libro)

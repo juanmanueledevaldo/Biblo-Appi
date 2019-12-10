@@ -14,7 +14,8 @@ namespace Bibloteca.Repositorio.Repositorios
         int Insert(Detalle detalle);
         int Delete(int id);
         IEnumerable<Pendiente> GetAll();
-
+        IEnumerable<Resenia> Get(int id);
+        Task<Detalle> Update(Detalle detalle);
     }
     public class DetalleRepositorio : IDetalleRepositorio
     {
@@ -30,27 +31,42 @@ namespace Bibloteca.Repositorio.Repositorios
             return 1;
         }
 
+        public IEnumerable<Resenia> Get(int id)
+        {
+            var Detalles = from lib in _db.Libro
+                           join det in _db.Detalle
+                           on lib.Id equals det.Libroi
+                           join pre in _db.Prestamo
+                           on det.Prestamoi equals pre.Id
+                           where lib.Id == id
+                           select new Resenia
+                           {
+                               Fecha = pre.Fecha,
+                               Comentario = det.Comentario,
+                               Folio = pre.Folio,
+                               Id = det.Id
+                           };
+            return Detalles;
+        }
+
         public IEnumerable<Pendiente> GetAll()
         {
-            //return _db.Detalle;
             var Pendiente = from lib in _db.Libro
                             join det in _db.Detalle
                             on lib.Id equals det.Libroi
+                            
                             select new Pendiente
                             {
-                                Id=lib.Id,
+                                Id = det.Id,
+                                Detalle = lib.Id,
                                 Estante = lib.Estante,
                                 Folio = lib.Folio,
                                 Genero = lib.Genero,
                                 Imagen = lib.Imagen,
                                 Nombre = lib.Nombre,
-                                Stock= lib.Stock,
-                                Detalle = det.Id,
-                                Comentario =""
+                                Stock = lib.Stock,
+                                Comentario = det.Comentario
                             };
-                           
-                            
-                           
             return Pendiente;
                       
                       
@@ -61,6 +77,15 @@ namespace Bibloteca.Repositorio.Repositorios
             _db.Detalle.Add(detalle);
             _db.SaveChanges();
             return 1;
+        }
+
+        public Task<Detalle> Update(Detalle detalle)
+        {
+            _db.Entry(detalle).State = EntityState.Modified;
+            _db.SaveChanges();
+            var detalles =_db.Detalle.FirstOrDefaultAsync(de => de.Id == detalle.Id);
+            return detalles;
+
         }
     }
 }

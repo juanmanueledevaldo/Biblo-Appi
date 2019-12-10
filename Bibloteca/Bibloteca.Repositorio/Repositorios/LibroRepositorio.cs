@@ -16,6 +16,8 @@ namespace Bibloteca.Repositorio.Repositorios
         int Insert(Libro libro);
         Libro Update(Libro libro);
         bool Delete(int id);
+        void Restar(int? id);
+        void Sumar(int? id);
     }
     public class LibroRepositorio : ILibroRepositorio
     {
@@ -58,20 +60,32 @@ namespace Bibloteca.Repositorio.Repositorios
             }
         }
 
+        public void Restar(int? id)
+        {
+            Libro libro = new Libro();
+            libro = _db.Libro.FirstOrDefault(li => li.Id == id);
+            libro.Stock = libro.Stock-1;
+            _db.Entry(libro).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        public void Sumar(int?  id)
+        {
+            Libro libro = new Libro();
+            libro = _db.Libro.FirstOrDefault(li => li.Id == id);
+            libro.Stock = libro.Stock +1;
+            _db.Entry(libro).State = EntityState.Modified;
+            _db.SaveChanges();
+            
+        }
+
         public Libro Update(Libro libro)
         {
-            try
-            {
                 _db.Entry(libro).State = EntityState.Modified;
                 _db.SaveChanges();
                 return _db.Libro.FirstOrDefault(li => li.Id == libro.Id);
 
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
+            
         }
     }
 }
