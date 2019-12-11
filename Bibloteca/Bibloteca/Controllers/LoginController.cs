@@ -68,8 +68,9 @@ namespace Bibloteca.Controllers
             {
 
                 var claims = HttpContext.User.Claims;
-                var tip = HttpContext.User.Claims.FirstOrDefault(x => x.Type  == ClaimTypes.Role).Value; 
-               return Ok(tip);
+                var tip = HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.Role).Value;
+            
+                return Ok(tip);
                
 
             }
@@ -78,8 +79,19 @@ namespace Bibloteca.Controllers
 
                 return BadRequest();
             }
-        } 
-        
+        }
+        [HttpGet]
+     
+        [Route("GetUser")]
+        public IActionResult GetUser()
+        {
+            var userClaims = HttpContext.User.Claims;
+            int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+
+
+            return Ok(userId);
+        }
+
         // POST: api/Login
         [HttpPost]
         [AllowAnonymous]
@@ -105,7 +117,8 @@ namespace Bibloteca.Controllers
                     //se añade el rol al claim
                     claims.Add(new Claim(ClaimTypes.Role, Convert.ToString(userExistente.Tipo)));
                     claims.Add(new Claim("Id",userExistente.Id.ToString()));
-                    claims.Add(new Claim("Mote",userExistente.Mote.ToString())); 
+                    claims.Add(new Claim("Mote",userExistente.Mote.ToString()));
+                    
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImxvcXVlc2VhIiwiaWF0IjoxNTE2MjM5MDIyfQ.KI2p5vksjJRiO_1R7qSkmeGZchby9gpuJHLPPkh2EUg"));
                     JwtSecurityToken token = new JwtSecurityToken(
                             claims: claims,
@@ -114,8 +127,8 @@ namespace Bibloteca.Controllers
                             expires: DateTime.Now.AddDays(1),
                             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
                         );
-
-                    return new OkObjectResult(new { Token = new JwtSecurityTokenHandler().WriteToken(token) });
+                   
+                    return new OkObjectResult(new { Token = new JwtSecurityTokenHandler().WriteToken(token), userExistente });
 
                 }
             }
@@ -128,8 +141,7 @@ namespace Bibloteca.Controllers
 
 
         [HttpGet]
-        [Authorize]
-        [Route("api/login/UserProfile")]
+       
         //GET : /api/UserProfile
       
 
