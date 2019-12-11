@@ -53,8 +53,9 @@ namespace Bibloteca.Controllers
         
         // PUT: api/Detalle/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody] IEnumerable< Detalle > value)
         {
+            return Ok(_detalleServicio.Update(value));
         }
         
         // DELETE: api/ApiWithActions/5

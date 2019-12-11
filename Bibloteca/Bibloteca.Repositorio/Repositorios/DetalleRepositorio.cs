@@ -15,7 +15,7 @@ namespace Bibloteca.Repositorio.Repositorios
         int Delete(int id);
         IEnumerable<Pendiente> GetAll();
         IEnumerable<Resenia> Get(int id);
-        Task<Detalle> Update(Detalle detalle);
+        Detalle Update(IEnumerable <Detalle> detalle);
     }
     public class DetalleRepositorio : IDetalleRepositorio
     {
@@ -79,12 +79,12 @@ namespace Bibloteca.Repositorio.Repositorios
             return 1;
         }
 
-        public Task<Detalle> Update(Detalle detalle)
+        public Detalle Update(IEnumerable<Detalle> detalle)
         {
             _db.Entry(detalle).State = EntityState.Modified;
             _db.SaveChanges();
-            var detalles =_db.Detalle.FirstOrDefaultAsync(de => de.Id == detalle.Id);
-            return detalles;
+
+            return null;
 
         }
     }
