@@ -59,8 +59,14 @@ namespace Bibloteca.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]Libro value)
         {
+            if(ModelState.IsValid)
+            {
+                _libroServicio.Add(value);
+                return Ok(200);
+            }
             _libroServicio.Add(value);
-            return Ok(200);
+            return BadRequest("No se pudo crear el libro");
+
         }
         
         // PUT: api/Libro/5

@@ -66,8 +66,15 @@ namespace Bibloteca.Controllers
         {
             try
             {
-                _usuarioServicio.Add(value);
-                return Ok(200);
+                if (ModelState.IsValid)
+                {
+                    _usuarioServicio.Add(value);
+                    return Ok(200);
+                }
+                else
+                {
+                    return BadRequest("No se pudo insertar el usuario");
+                }
             }
             catch (Exception e)
             {

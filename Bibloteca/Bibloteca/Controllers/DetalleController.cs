@@ -40,6 +40,7 @@ namespace Bibloteca.Controllers
         {
             try
             {
+
                 _detalleServicio.Add(value);
                 return Ok(200);
             }
