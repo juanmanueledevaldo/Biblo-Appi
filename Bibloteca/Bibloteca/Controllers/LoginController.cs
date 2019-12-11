@@ -60,7 +60,7 @@ namespace Bibloteca.Controllers
        
         [HttpGet]
         [Authorize]
-        //[Route("Admin")]
+        [Route("Admin")]
         public IActionResult Admin()
         {
 
@@ -128,7 +128,7 @@ namespace Bibloteca.Controllers
                             signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
                         );
                    
-                    return new OkObjectResult(new { Token = new JwtSecurityTokenHandler().WriteToken(token), userExistente });
+                    return new OkObjectResult(new { Token = new JwtSecurityTokenHandler().WriteToken(token) });
 
                 }
             }
