@@ -60,16 +60,11 @@ namespace Bibloteca.Repositorio.Repositorios
 
         public Usuario Update(Usuario usuario)
         {
-            try
-            {
+           
                 _db.Entry(usuario).State = EntityState.Modified;
                 _db.SaveChanges();
                 return _db.Usuario.FirstOrDefault(us => us.Id == usuario.Id);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+           
         }
 
        

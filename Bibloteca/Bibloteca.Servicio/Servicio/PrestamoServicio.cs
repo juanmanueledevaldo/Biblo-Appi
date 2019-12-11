@@ -19,14 +19,21 @@ namespace Bibloteca.Servicio.Servicio
     public class PrestamoServicio: IPrestamoServicio
     {
         private readonly IPrestamoRepositorio _prestamoRepositorio;
-        public PrestamoServicio(IPrestamoRepositorio prestamoRepositorio)
+        private readonly IDetalleRepositorio _detalleRepositorio;
+        public PrestamoServicio(IPrestamoRepositorio prestamoRepositorio, IDetalleRepositorio detalleRepositorio)
         {
             _prestamoRepositorio = prestamoRepositorio;
+            _detalleRepositorio = detalleRepositorio;
         }
 
         public void Add(Prestamo prestamo)
+
         {
+            ICollection<Detalle> detalles;
+            detalles =  prestamo.Detalle;
+            prestamo.Detalle = null;
             _prestamoRepositorio.Insert(prestamo);
+            _detalleRepositorio.Update(detalles);
         }
 
         public Reporte Get(int id)

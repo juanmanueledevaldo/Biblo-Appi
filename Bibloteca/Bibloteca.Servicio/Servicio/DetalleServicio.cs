@@ -12,6 +12,7 @@ namespace Bibloteca.Servicio.Servicio
         void Add(Detalle detalle);
         int Remove(int id);
         IEnumerable<Pendiente> GetDetalles();
+        Detalle Update(IEnumerable< Detalle > detalle);
         
     }
     public class DetalleServicio : IDetalleServicio
@@ -42,6 +43,12 @@ namespace Bibloteca.Servicio.Servicio
             _libroRepositorio.Sumar(id);
 
             return _detalleRepositorio.Delete(id);
+        }
+
+        public Detalle Update(IEnumerable <Detalle>detalle)
+        {
+            return _detalleRepositorio.Update(detalle);
+           
         }
     }
 }

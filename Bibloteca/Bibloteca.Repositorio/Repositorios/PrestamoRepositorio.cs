@@ -70,6 +70,7 @@ namespace Bibloteca.Repositorio.Repositorios
 
         public int Insert(Prestamo prestamo)
         {
+            
             _db.Add(prestamo);
             _db.SaveChanges();
             return 1;
