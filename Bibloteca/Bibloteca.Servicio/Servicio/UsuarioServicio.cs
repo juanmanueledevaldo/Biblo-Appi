@@ -24,15 +24,31 @@ namespace Bibloteca.Servicio.Servicio
     public class UsuarioServicio : IUsuarioServicio
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
-        public UsuarioServicio(IUsuarioRepositorio usuarioRepositorio)
+        private readonly IEmailSender _emailSender;
+        public UsuarioServicio(IUsuarioRepositorio usuarioRepositorio, IEmailSender emailSender)
         {
+            this._emailSender = emailSender;
             _usuarioRepositorio = usuarioRepositorio;
 
         }
-        public void Add(Usuario usuario)
+        public void Add (Usuario usuario)
         {
-            _usuarioRepositorio.Insert(usuario);
+            
+            var isCreated = _usuarioRepositorio.GetTodos().Where(x => x.Mote == usuario.Mote && x.Email == usuario.Email).FirstOrDefault();
+            if (isCreated == null)
+            {
+
+                _usuarioRepositorio.Insert(usuario);
+                 this._emailSender.SendEmailAsync(usuario.Email, "Bienvenido", "bienvenido a EPBiblioteca").ConfigureAwait(false);
+            }
+            else
+            {
+               
+            }
         }
+            
+
+        
 
         public bool Delete(int id)
         {

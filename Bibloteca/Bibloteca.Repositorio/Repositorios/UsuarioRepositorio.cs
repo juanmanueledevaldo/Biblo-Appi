@@ -52,7 +52,7 @@ namespace Bibloteca.Repositorio.Repositorios
 
         public int Insert(Usuario usuario)
         {
-               
+            
                 _db.Add(usuario);
                 _db.SaveChanges();
                 return 1;

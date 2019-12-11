@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bibloteca.Modelo.Modelo;
 using Bibloteca.Repositorio.Repositorios;
 using Bibloteca.Servicio.Servicio;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -57,7 +58,10 @@ namespace Bibloteca
          
             //Reportes
             services.AddTransient<IExcelServicio, ExcelServicio>();
-            
+
+            //correo
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<EmailSenderOptions>(Configuration.GetSection("EmailSenderOptions"));
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
