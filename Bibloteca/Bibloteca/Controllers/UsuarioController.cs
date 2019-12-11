@@ -30,8 +30,8 @@ namespace Bibloteca.Controllers
         {
             try
             {
-                //var userClaims = HttpContext.User.Claims;
-                //int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "Id").Value);
+                var userClaims = HttpContext.User.Claims;
+                int userId = int.Parse(HttpContext.User.Claims.FirstOrDefault(x => x.Type == "UserId").Value);
                 return Ok(_usuarioServicio.GetTodos());
 
             }
