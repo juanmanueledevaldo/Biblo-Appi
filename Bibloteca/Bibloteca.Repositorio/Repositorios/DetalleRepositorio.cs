@@ -81,8 +81,14 @@ namespace Bibloteca.Repositorio.Repositorios
 
         public Detalle Update(IEnumerable<Detalle> detalle)
         {
-            _db.Entry(detalle).State = EntityState.Modified;
-            _db.SaveChanges();
+            var prestamo = _db.Prestamo.LastOrDefault();
+            foreach (var item in detalle)
+            {
+                item.Prestamoi = prestamo.Id;
+                _db.Entry(item).State = EntityState.Modified;
+                _db.SaveChanges();
+            }
+            
 
             return null;
 
