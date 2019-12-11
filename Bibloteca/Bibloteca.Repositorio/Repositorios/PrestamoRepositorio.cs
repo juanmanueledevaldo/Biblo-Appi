@@ -23,36 +23,13 @@ namespace Bibloteca.Repositorio.Repositorios
         public Reporte Get(int id)
         {
             var reporte = from lib in _db.Libro
-                           join det in _db.Detalle
-                           on lib.Id equals det.Libroi
-                           join pre in _db.Prestamo
-                           on det.Prestamoi equals pre.Id
-                           join usu in _db.Usuario
-                           on pre.Usuarioi equals usu.Id
-                           where (pre.Id == id)
-                           select new Reporte
-                           {
-                               Id = pre.Id,
-                               Folio = pre.Folio,
-                               Nombres = $"{usu.Nombre} {usu.Apellido}",
-                               Fecha = pre.Fecha,
-                               Devolucion = pre.Devolucion,
-                               Estado = pre.Estado,
-                               Pedido = lib.Nombre,
-
-                           };
-            return reporte.FirstOrDefault();
-        }
-
-        public IEnumerable<Reporte> GetTodos()
-        {
-            var reportes = from lib in _db.Libro
                           join det in _db.Detalle
                           on lib.Id equals det.Libroi
                           join pre in _db.Prestamo
                           on det.Prestamoi equals pre.Id
                           join usu in _db.Usuario
                           on pre.Usuarioi equals usu.Id
+                          where (pre.Id == id)
                           select new Reporte
                           {
                               Id = pre.Id,
@@ -61,19 +38,38 @@ namespace Bibloteca.Repositorio.Repositorios
                               Fecha = pre.Fecha,
                               Devolucion = pre.Devolucion,
                               Estado = pre.Estado,
-                              Pedido = lib.Nombre,
-                              Carrera = usu.Carrera,
-                              Telefono = usu.Telefono,
-                              Email = usu.Email
                               
+                           };
+            return reporte.FirstOrDefault();
+        }
+
+        public IEnumerable<Reporte> GetTodos()
+        {
+            var reportes = from lib in _db.Libro
+                           join det in _db.Detalle
+                           on lib.Id equals det.Libroi
+                           join pre in _db.Prestamo
+                           on det.Prestamoi equals pre.Id
+                           join usu in _db.Usuario
+                           on pre.Usuarioi equals usu.Id
+                           select new Reporte
+                           {
+                               Id = pre.Id,
+                               Folio = pre.Folio,
+                               Nombres = $"{usu.Nombre} {usu.Apellido}",
+                               Fecha = pre.Fecha,
+                               Devolucion = pre.Devolucion,
+                               Estado = pre.Estado,
+                               Carrera = usu.Carrera,
+                               Telefono = usu.Telefono,
+                               Email = usu.Email,
+                               Pedido = lib.Nombre
                           };
             return reportes;
         }
 
         public int Insert(Prestamo prestamo)
         {
-            //prestamo.Fecha = DateTime.Now.Date;
-            //prestamo.Devolucion = DateTime.Now.Date;
             _db.Add(prestamo);
             _db.SaveChanges();
             return 1;

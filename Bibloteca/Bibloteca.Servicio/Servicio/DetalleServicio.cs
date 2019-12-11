@@ -12,17 +12,23 @@ namespace Bibloteca.Servicio.Servicio
         void Add(Detalle detalle);
         int Remove(int id);
         IEnumerable<Pendiente> GetDetalles();
+        
     }
     public class DetalleServicio : IDetalleServicio
     {
         private readonly IDetalleRepositorio _detalleRepositorio;
-        public DetalleServicio(IDetalleRepositorio detalleRepositorio)
+        private readonly ILibroRepositorio _libroRepositorio;
+        public DetalleServicio(IDetalleRepositorio detalleRepositorio, ILibroRepositorio libroRepositorio)
         {
             _detalleRepositorio = detalleRepositorio;
+            _libroRepositorio = libroRepositorio;
         }
         public void Add(Detalle detalle)
         {
+           
+            _libroRepositorio.Restar(detalle.Libroi);
             _detalleRepositorio.Insert(detalle);
+            
             
         }
 
@@ -33,6 +39,8 @@ namespace Bibloteca.Servicio.Servicio
 
         public int Remove(int id)
         {
+            _libroRepositorio.Sumar(id);
+
             return _detalleRepositorio.Delete(id);
         }
     }
